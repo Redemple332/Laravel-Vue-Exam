@@ -4,6 +4,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\UserController;
 use App\Http\Controllers\API\RoleController;
+use App\Http\Controllers\API\LoginController;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -15,15 +17,19 @@ use App\Http\Controllers\API\RoleController;
 |
 */
 
+/*Public API */
+Route::post('login', [LoginController::class, 'login']);
+Route::get('/logout', [LoginController::class, 'logout']);
 
-Route::get('users', [UserController::class, 'index']);
 
+Route::get('users', [UserController::class, 'index'])->middleware('web');
 Route::post('user/store', [UserController::class, 'store']);
 
 Route::prefix('/user')->group( function () {
     Route::put('/{id}', [UserController::class, 'update']);
     Route::delete('/{id}', [UserController::class, 'destroy']);
 });
+
 
 Route::get('roles', [RoleController::class, 'index']);
 Route::prefix('/role')->group( function () {
