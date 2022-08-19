@@ -22,7 +22,7 @@ Route::post('login', [LoginController::class, 'login']);
 Route::get('/logout', [LoginController::class, 'logout']);
 
 
-Route::get('users', [UserController::class, 'index'])->middleware('web');
+Route::get('users', [UserController::class, 'index']);
 Route::post('user/store', [UserController::class, 'store']);
 
 Route::prefix('/user')->group( function () {
