@@ -21,8 +21,12 @@ use App\Http\Controllers\API\LoginController;
 Route::post('login', [LoginController::class, 'login']);
 Route::get('/logout', [LoginController::class, 'logout']);
 
-
-Route::get('users', [UserController::class, 'index']);
+Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+    return $request->user();
+});
+Route::middleware('auth:sanctum')->get('/athenticated', function () {
+    return true;
+});
 Route::post('user/store', [UserController::class, 'store']);
 
 Route::prefix('/user')->group( function () {

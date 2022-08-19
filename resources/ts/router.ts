@@ -7,7 +7,7 @@ import {
   import Home from "./vue/views/Home.vue";
   import About from "./vue/views/About.vue";
   import Login from "./vue/views/Login.vue";
-
+  import axios from "axios"
   
   const routes: Array<RouteRecordRaw> = [
     {
@@ -18,12 +18,20 @@ import {
     {
       path: "/about",
       name: "About page",
-      component: About,
+      component: About, 
+      beforeEnter: (to, form, next) =>{
+        axios.get('/api/athenticated').then(()=>{
+            next()
+        }).catch(()=>{
+            return next({ name: 'Login page'})
+        })
+      }
     },
     {
       path: "/login",
       name: "Login page",
-      component: Login,
+      component: Login
+     
     }
   ];
   
