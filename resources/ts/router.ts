@@ -5,10 +5,10 @@ import {
   } from "vue-router";
   
   import Home from "./vue/views/Home.vue";
-  import About from "./vue/views/About.vue";
   import Login from "./vue/views/Login.vue";
   import Role from "./vue/views/Role.vue";
-  import UserForm from "./vue/views/UserForm.vue";
+  import AddUser from "./vue/views/AddUser.vue";
+  import EditUser from "./vue/views/EditUser.vue";
 
 
   import axios from "axios"
@@ -25,11 +25,30 @@ import {
             return next({ name: 'Login page'})
         })
       }
+    }, 
+    {
+      path: "/user/add",
+      name: "User form page",
+      component: AddUser,
+      beforeEnter: (to, form, next) =>{
+        axios.get('/api/athenticated').then(()=>{
+            next()
+        }).catch(()=>{
+            return next({ name: 'Login page'})
+        })
+      }
     },
     {
-      path: "/about",
-      name: "About page",
-      component: About, 
+      path: `/user/edit/:id`,
+      name: "userEditPage",
+      component: EditUser,
+      beforeEnter: (to, form, next) =>{
+        axios.get('/api/athenticated').then(()=>{
+            next()
+        }).catch(()=>{
+            return next({ name: 'Login page'})
+        })
+      }
     },
     {
       path: "/login",
@@ -55,6 +74,7 @@ import {
         })
       }
     },
+    
   ];
   
   const router = createRouter({

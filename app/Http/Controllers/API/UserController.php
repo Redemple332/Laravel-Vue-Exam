@@ -14,16 +14,17 @@ class UserController extends Controller
 
     public function index()
     {
-        $users = User::with('role')->get();
+        $users = User::with('role')->latest()->get();
         return response()->json([
             'users' => $users,
         ]);
     }
 
-    public function user()
+    public function edit($id)
     {
+        $user = User::find($id);
         return response()->json([
-            'user' =>  Auth::user(),
+            'user' => $user,
         ]);
     }
 
