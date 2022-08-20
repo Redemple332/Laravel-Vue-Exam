@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
@@ -19,6 +20,12 @@ class UserController extends Controller
         ]);
     }
 
+    public function user()
+    {
+        return response()->json([
+            'user' =>  Auth::user(),
+        ]);
+    }
 
     public function store(Request $request)
     {
@@ -59,7 +66,7 @@ class UserController extends Controller
             $user->update([
                 'name' => $request->name,
                 'email' => $request->email,
-                'password' => $request->password,
+                'password' => Hash::make($request->password),
                 'role_id' => $request->role_id
             ]);
             return response()->json([

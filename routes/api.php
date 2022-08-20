@@ -18,15 +18,20 @@ use App\Http\Controllers\API\LoginController;
 */
 
 /*Public API */
-Route::post('login', [LoginController::class, 'login']);
-Route::get('/logout', [LoginController::class, 'logout']);
+
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+Route::post('login', [LoginController::class, 'login']);
+Route::get('/logout', [LoginController::class, 'logout']);
 Route::middleware('auth:sanctum')->get('/athenticated', function () {
     return true;
 });
+
+Route::get('users', [UserController::class, 'index']);
+
+
 Route::post('user/store', [UserController::class, 'store']);
 
 Route::prefix('/user')->group( function () {
