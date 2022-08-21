@@ -43,7 +43,6 @@ export default defineComponent({
         const users = ref<any[]>([])
         return {users}
     },
-
     components: {
         User
     },
@@ -53,12 +52,12 @@ export default defineComponent({
                 this.users = res.data.users
             })
         },
-        refreshData () {
-            this.userData()
+        async refreshData () {
+           await  this.userData()
         }
     },
     async created(){
-       this.userData()
+       await this.userData()
     }
 })
 </script>

@@ -23,15 +23,15 @@ use App\Http\Controllers\API\LoginController;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+
 Route::post('login', [LoginController::class, 'login']);
-Route::get('/logout', [LoginController::class, 'logout']);
+Route::get('/logout', [LoginController::class, 'logout'])->middleware('auth:sanctum');;
 Route::middleware('auth:sanctum')->get('/athenticated', function () {
     return true;
 });
 
 Route::get('users', [UserController::class, 'index']);
-
-
 Route::post('user/store', [UserController::class, 'store']);
 
 Route::prefix('/user')->group( function () {
@@ -39,7 +39,6 @@ Route::prefix('/user')->group( function () {
     Route::put('/{id}', [UserController::class, 'update']);
     Route::delete('/{id}', [UserController::class, 'destroy']);
 });
-
 
 Route::get('roles', [RoleController::class, 'index']);
 Route::prefix('/role')->group( function () {

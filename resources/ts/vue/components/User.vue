@@ -21,7 +21,6 @@
 <script lang="ts">
 import axios from 'axios'
 import { defineComponent, ref } from 'vue'
-import router from '../../router'
 
 export default defineComponent({
     props: {
@@ -36,7 +35,7 @@ export default defineComponent({
             if(confirm("Do you really want to delete?")){
                 await axios.delete(`api/user/${id}`).then(res => {
                     if(res.status){
-                         this.$emit('loadUser')
+                        this.$emit('loadUser')
                     }
                 }).catch( err => {
                     console.error(err)

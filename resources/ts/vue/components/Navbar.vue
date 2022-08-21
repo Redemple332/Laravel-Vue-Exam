@@ -42,9 +42,9 @@ export default defineComponent({
   },
   methods : {
    async logout(){
-      axios.get('api/logout').then( () => {
+      await axios.get('api/logout').then( () => {
         router.push('/login')
-         this.user = []
+        this.user = []
       })
     }
   },
