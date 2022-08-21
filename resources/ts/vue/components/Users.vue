@@ -24,7 +24,7 @@
             <tbody>
           
             <tr v-for="user in users"  :key="user.id" class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                <user :user="user"></user>
+                <user  @loadUser="refreshData" :user="user"></user>
             </tr>
          
             </tbody>
@@ -43,13 +43,22 @@ export default defineComponent({
         const users = ref<any[]>([])
         return {users}
     },
+
     components: {
         User
     },
+    methods: {
+        async userData(){
+            await  axios.get('api/users').then( (res) => {
+                this.users = res.data.users
+            })
+        },
+        refreshData () {
+            this.userData()
+        }
+    },
     async created(){
-       await  axios.get('api/users').then( (res) => {
-           this.users = res.data.users
-        })
+       this.userData()
     }
 })
 </script>

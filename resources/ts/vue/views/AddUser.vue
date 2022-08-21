@@ -5,7 +5,7 @@
     <div class="mb-6">
       <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Full Name</label>
       <input v-model="name"  class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light">
-      <p class="mt-2 text-sm text-red-600 dark:text-red-500"><span class="font-medium">{{errors.name}}</span></p>
+      <p class="mt-2 text-sm text-red-600 dark:text-red-500"><span class="font-medium">{{errors.name ? errors.name[0] : ''}}</span></p>
     </div>
     <div class="mb-6">
       <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Your email</label>
@@ -55,7 +55,10 @@ export default defineComponent({
     const email = ref<string>()
     const password = ref<string | number>()
     const password_confirmation = ref<string | number>()
-    const errors = ref<any[]>([])
+    const errors = ref<any>([{
+      name: '',
+    
+    }])
 
     return {
       roles, 
@@ -79,7 +82,6 @@ export default defineComponent({
       .then(response => {
         if(response.status == 200){
           this.clearData()
-          alert('New User Successfully Added.')
           router.push("/")
         }
       }).catch( error => {

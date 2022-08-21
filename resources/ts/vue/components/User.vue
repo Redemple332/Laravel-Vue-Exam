@@ -27,21 +27,16 @@ export default defineComponent({
     props: {
         user: Object
     },
-
     setup(){
         const id = ref<number>()
         return {id}
     },
     methods: {
-        edit(id : number){
-            alert(id)
-        },
         async deleteUser(id: number){
             if(confirm("Do you really want to delete?")){
                 await axios.delete(`api/user/${id}`).then(res => {
                     if(res.status){
-                        alert('User Deleted Successfully')
-                        router.push("/")
+                         this.$emit('loadUser')
                     }
                 }).catch( err => {
                     console.error(err)
@@ -49,6 +44,6 @@ export default defineComponent({
             }
         },
         
-    }
+    },emits: ["loadUser"]
 })
 </script>

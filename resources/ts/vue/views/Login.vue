@@ -38,17 +38,17 @@ export default defineComponent({
 
   methods: {
     login(){
-        axios.post('/api/login', {
-          email: this.email,
-          password: this.password
-        })
-        .then(response => {
-          if(response.status == 200){
-            router.push("/")
-          }
-        }).catch( error => {
-          this.errors = error.response.data.errors; // this should be errors.
-        })
+      axios.post('/api/login', {
+        email: this.email,
+        password: this.password
+      })
+      .then(response => {
+        if(response.status == 200){
+          router.push("/")
+        }
+      }).catch( error => {
+        this.errors = error.response.data.errors; // this should be errors.
+      })
     }
   }
 })

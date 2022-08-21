@@ -46,16 +46,14 @@ import router from '../../router'
 
 export default defineComponent({
 
-
-
   setup() {
-    const roles = ref<any[]>([])
+    const roles = ref<any>([])
     const role = ref<string>()
     const name = ref<string>()
     const email = ref<string>()
     const password = ref<string | number>()
     const password_confirmation = ref<string | number>()
-    const errors = ref<any[]>([])
+    const errors = ref<any>([])
     const user =  ref<any>()
     const id = ref<any>()
     return {
@@ -100,10 +98,11 @@ export default defineComponent({
   },
   async created() {
     this.id = this.$route.params.id;
-    await axios.get(`api/user/edit/${this.id}`).then( (res) => {
-    this.user =  res.data.user
-    })
-   
+    alert(this.id)
+   const res =  await axios.get(`http://127.0.0.1:8000/api/user/edit/45`);
+
+   this.user = res.data
+    console.log(res.data)
     console.log(this.$route.params.id)
   },
 })
