@@ -21,6 +21,7 @@
 <script lang="ts">
 import axios from 'axios'
 import { defineComponent, ref } from 'vue'
+import UserData from '../../services/UserData'
 
 export default defineComponent({
     props: {
@@ -31,9 +32,9 @@ export default defineComponent({
         return {id}
     },
     methods: {
-        async deleteUser(id: number){
+        async deleteUser(id:  string | number){
             if(confirm("Do you really want to delete?")){
-                await axios.delete(`api/user/${id}`).then(res => {
+                await UserData.delete(id).then(res => {
                     if(res.status){
                         this.$emit('loadUser')
                     }
@@ -42,6 +43,7 @@ export default defineComponent({
                 })
             }
         },
+        
         
     },emits: ["loadUser"]
 })

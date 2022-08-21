@@ -33,8 +33,8 @@
 </template>
 
 <script lang="ts">
-import axios from 'axios'
 import User from './User.vue'
+import UserData from "../../services/UserData";
 import { defineComponent, ref } from 'vue'
 
 export default defineComponent({
@@ -47,17 +47,17 @@ export default defineComponent({
         User
     },
     methods: {
-        async userData(){
-            await  axios.get('api/users').then( (res) => {
+        async getUsers(){
+            await  UserData.getAll().then( (res) => {
                 this.users = res.data.users
             })
         },
         async refreshData () {
-           await  this.userData()
-        }
+           await  this.getUsers()
+        },
     },
     async created(){
-       await this.userData()
+       await this.getUsers()
     }
 })
 </script>
