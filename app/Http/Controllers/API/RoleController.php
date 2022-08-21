@@ -14,7 +14,7 @@ class RoleController extends Controller
 
         return response()->json([
             'roles' => $roles
-        ]);
+        ], 200);
     }
 
     public function store(Request $request)
@@ -31,8 +31,16 @@ class RoleController extends Controller
         ]);
         return response()->json([
             'role' => $role
-        ]);
+        ], 200);
 
+    }
+
+    public function edit($id)
+    {
+        $role = Role::find($id);
+        return response()->json([
+            'role' => $role,
+        ], 200);
     }
 
     public function update(Request $request, $id){
@@ -52,7 +60,7 @@ class RoleController extends Controller
 
             return response()->json([
                 'role' => $role
-            ]);
+            ], 200);
         }
         return "Role not Found!.";
     }

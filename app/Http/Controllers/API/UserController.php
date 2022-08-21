@@ -17,7 +17,7 @@ class UserController extends Controller
         $users = User::with('role')->latest()->get();
         return response()->json([
             'users' => $users,
-        ]);
+        ], 200);
     }
 
     public function edit($id)
@@ -25,7 +25,7 @@ class UserController extends Controller
         $user = User::find($id);
         return response()->json([
             'user' => $user,
-        ]);
+        ], 200);
     }
 
     public function store(Request $request)
@@ -48,7 +48,7 @@ class UserController extends Controller
         return response()->json([
             'users' => $user,
             'message' => 'Created Sucessfully'
-        ]);
+        ], 200);
     }
 
     public function update(Request $request, $id)
@@ -73,7 +73,7 @@ class UserController extends Controller
             return response()->json([
                 'users' => $user,
                 'message' => 'Updated Sucessfully'
-            ]);
+            ], 200);
         }
         return "User not Found!.";
 
